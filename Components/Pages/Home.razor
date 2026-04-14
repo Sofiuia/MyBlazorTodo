@@ -1,0 +1,35 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<div style="padding: 20px; text-align: center; font-family: sans-serif;">
+    <h1 style="color: #512bd4;">Мій перший Blazor TODO</h1>
+
+    <div style="margin: 20px 0;">
+        <input @bind="newTask" placeholder="Що треба зробити?" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+        <button @onclick="Add" style="padding: 8px 15px; background-color: #512bd4; color: white; border: none; border-radius: 4px; cursor: pointer;">Додати</button>
+    </div>
+
+    <ul style="list-style-type: none; padding: 0; display: inline-block; text-align: left;">
+        @foreach (var task in tasks)
+        {
+            <li style="background: #f4f4f4; margin: 5px 0; padding: 10px; border-radius: 5px; min-width: 200px; display: flex; justify-content: space-between;">
+                <span>@task</span>
+                <button @onclick="@(() => tasks.Remove(task))" style="border: none; background: none; color: red; cursor: pointer;">✕</button>
+            </li>
+        }
+    </ul>
+</div>
+
+@code {
+    private string newTask = "";
+    private List<string> tasks = new();
+
+    private void Add()
+    {
+        if (!string.IsNullOrWhiteSpace(newTask))
+        {
+            tasks.Add(newTask);
+            newTask = "";
+        }
+    }
+}
