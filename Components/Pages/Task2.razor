@@ -1,0 +1,45 @@
+@page "/task2"
+@rendermode InteractiveServer
+@inject IJSRuntime JS
+
+<div style="padding: 20px; border: 2px solid Teal; border-radius: 10px;">
+    <h3 style="color: Teal;">Завдання №2: JS та Binding</h3>
+
+    <CascadingValue Value="@("Teal")">
+        <div>
+            <p>Введіть ім'я (Two-way binding):</p>
+            <input @bind="userName" @bind:event="oninput" />
+            <p>Вітаю, <b>@userName</b>!</p>
+        </div>
+    </CascadingValue>
+
+    <hr />
+
+    <button @onclick="CallJS">Викликати Alert</button>
+    <button @onclick="AskJS">JS запитає C#</button>
+
+    <p style="color: green; font-weight: bold;">@messageFromJS</p>
+</div>
+
+@code {
+    private string userName = "Студент";
+    private string messageFromJS = "";
+
+    private async Task CallJS()
+    {
+        await JS.InvokeVoidAsync("showAlert", $"Привіт, {userName}!");
+    }
+
+    private async Task AskJS()
+    {
+        var dotNetHelper = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("askDotNet", dotNetHelper);
+    }
+
+    [JSInvokable]
+    public void GetMessageFromJS(string text)
+    {
+        messageFromJS = text;
+        StateHasChanged();
+    }
+}

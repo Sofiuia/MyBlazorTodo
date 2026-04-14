@@ -76,3 +76,4 @@
 /Users/sofiatarasenko/MyTodoApp/obj/Debug/net9.0/MyTodoApp.pdb
 /Users/sofiatarasenko/MyTodoApp/obj/Debug/net9.0/MyTodoApp.genruntimeconfig.cache
 /Users/sofiatarasenko/MyTodoApp/obj/Debug/net9.0/ref/MyTodoApp.dll
+/Users/sofiatarasenko/MyTodoApp/obj/Debug/net9.0/MyTodoApp.sourcelink.json
